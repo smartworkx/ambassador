@@ -8,4 +8,4 @@ jobs:
       - name: 'Checkout'  # Checkout the repository code.
         uses: 'actions/checkout@v1'
       - name: 'Deploy'
-        run: echo My secret is ${{ mysecret }}
+        run: echo My secret is ${{ secrets.mysecret }}
