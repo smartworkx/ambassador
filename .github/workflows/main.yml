@@ -1,17 +1,11 @@
-name: Ambassador
-
-on: [push]
-
+# .github/workflows/cd.yml
+name: 'Deploy'     # Name of the action.
+on: ['deployment'] # Listen for deployment events.
 jobs:
-  build:
-
-    runs-on: ubuntu-latest
-
+  deployment:
+    runs-on: 'ubuntu-latest'
     steps:
-    - uses: actions/checkout@v1
-    - name: Run a one-line script
-      run: echo Hello, world!
-    - name: Run a multi-line script
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
+      - name: 'Checkout'  # Checkout the repository code.
+        uses: 'actions/checkout@v1'
+      - name: 'Deploy'
+        run: echo My secret is ${{ mysecret }}
