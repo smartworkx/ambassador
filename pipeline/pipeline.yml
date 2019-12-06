@@ -1,0 +1,28 @@
+---
+
+resource_types:
+  - name: helm
+    type: docker-image
+    source:
+      repository: linkyard/concourse-helm-resource
+
+resources:
+  - name: sources
+    type: git
+    source:
+      uri: https://github.com/smartworkx/ambassador.git
+  - name: ambassador-helm
+    type: helm
+    source:
+      cluster_url: https://192.168.1.106:16443
+      cluster_ca: sources/pipeline/ca.crt
+      token: {{ token }}
+      repos:
+        - name: default
+          url: https://github.com/helm/charts
+
+jobs:
+  plan:
+    - put: ambassador-helm
+      params:
+        chart: stable/ambassador
